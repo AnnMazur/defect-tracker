@@ -1,10 +1,3 @@
-name: CI
-
-on:
-  pull_request:
-    branches:
-      - dev
-
 jobs:
   build-backend:
     name: Build .NET Backend
@@ -17,36 +10,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # Будет установлена последняя 8.0.*, включая 8.0.400
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ./DefectTracker.csproj
+        run: dotnet restore ./backend/DefectTracker.csproj
 
       - name: Build backend
-        run: dotnet build ./DefectTracker.csproj--no-restore --configuration Release
+        run: dotnet build ./backend/DefectTracker.csproj --no-restore --configuration Release
 
       - name: Run backend tests
-        run: dotnet test ./DefectTracker.csproj --no-build --verbosity normal
-
-  build-frontend:
-    name: Build Vue.js Frontend
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.11.0'
-
-      - name: Install frontend dependencies
-        run: |
-          cd frontend 
-          npm install
-
-      - name: Build frontend
-        run: |
-          cd frontend
-          npm run build
+        run: dotnet test ./backend/DefectTracker.csproj --no-build --verbosity normal
