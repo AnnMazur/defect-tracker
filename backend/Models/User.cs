@@ -8,7 +8,9 @@ namespace defectTracker.Models
         public Guid Id { get; set; }            
         public string Name { get; set; } = "";  
         public string Email { get; set; } = "";
-        public string Password { get; set; } = "";
+
+        // Только хэш пароля
+        public string PasswordHash { get; set; } = "";
         
         // Навигационные свойства
         public Guid RoleId { get; set; }
