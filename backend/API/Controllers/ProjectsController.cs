@@ -35,7 +35,7 @@ namespace defectTracker.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Manager")] // только менеджеры создают проекты
+        [Authorize] 
         public async Task<IActionResult> Create([FromBody] ProjectCreateDto dto, CancellationToken cancellationToken)
         {
             var project = await _projectService.CreateAsync(dto, cancellationToken);
@@ -43,7 +43,7 @@ namespace defectTracker.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Manager")] // только менеджеры редактируют
+        [Authorize] 
         public async Task<IActionResult> Update(Guid id, [FromBody] ProjectUpdateDto dto, CancellationToken cancellationToken)
         {
             var project = await _projectService.UpdateAsync(id, dto, cancellationToken);
@@ -51,7 +51,7 @@ namespace defectTracker.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Manager")] // только менеджеры удаляют
+        [Authorize] 
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
             await _projectService.DeleteAsync(id, cancellationToken);

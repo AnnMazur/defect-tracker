@@ -10,7 +10,7 @@ namespace defectTracker.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Manager")] // только менеджеры могут управлять пользователями
+    [Authorize] // только менеджеры могут управлять пользователями
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
